@@ -1,6 +1,6 @@
-package src;
+package main;
 
-public class Moyenne {
+public class main {
     public static void moyenne(float[] coef) {
         double total = 0;
         for (int i = 0; i < coef.length; i++) {
@@ -10,4 +10,4 @@ public class Moyenne {
 
         System.out.format("La moyenne est: %.2f", moy);
     }
-}
+    }
