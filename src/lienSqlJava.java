@@ -13,6 +13,7 @@ public class lienSqlJava {
     PreparedStatement insertion;
 
     // Etablit la connexion avec la base de données.
+    // peut être long
     public void openDBConnection()
     {
         JdbcDataSource dataSource = new JdbcDataSource();
@@ -63,5 +64,42 @@ public class lienSqlJava {
         }
     }
 
+    //Récupérer les données dans la table entrée
+    public Collection<Object> recupereEntree(int cas) {
 
+        ArrayList<Object> parametres = new ArrayList<>();
+
+        // Utilisation d'une clause try-ressource permettant de gérer les exceptions d'ouverture
+        // et de fermeture (automatique) d'une ressource (interface Closeable)
+        try (Statement st = dbConnection.createStatement()) {
+
+            // Les requêtes de consultation sont éxécutées avec la méthode executeQuery.
+            // Cette méthode retourne une objet ResultSet contenant le résultat.
+            // Si cette requête est récurrente, il est possible d'utiliser un PreparedStatement.
+            ResultSet rs = st.executeQuery("select * from ENTREES where CASE = cas ");
+
+            //Itérateur. Retourne True quand il se positionne sur le tuple résultat suivant.
+            while (rs.next())
+            {
+                // De manière alternative, les méthodes get d'un ResultSet peuvent utiliser le nom de la colonne
+                // à la place de l'indice de la colonne sélectionnée dans la requête.
+                // En SQL, les indices démarrent à 1 et non 0.
+                parametres.add(rs.getInt("Case"));
+                parametres.add(rs.getFloat("He"));
+                parametres.add(rs.getFloat("Hs"));
+                parametres.add(rs.getFloat("Te"));
+                parametres.add(rs.getFloat("Diam_WR"));
+                parametres.add(rs.getFloat("WRyoung"));
+                parametres.add(rs.getFloat("offset ini"));
+                parametres.add(rs.getFloat("mu_ini"));
+                parametres.add(rs.getFloat("Force"));
+                parametres.add(rs.getFloat("G"));
+            }
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return parametres;
+    }
 }
