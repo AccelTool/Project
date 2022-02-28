@@ -6,7 +6,7 @@ public class main {
     public static void main(String[] args) throws IOException {
         System.out.println("Hello World!"); // Display the string.
 
-        ApplicationB application=new ApplicationB();
+        Application application=new Application();
         application.execute();
     }
 

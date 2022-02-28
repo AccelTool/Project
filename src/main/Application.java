@@ -2,14 +2,14 @@ package main;
 
 import java.io.*;
 
-public class ApplicationB {
+public class Application {
 
-    public ApplicationB() {
+    public Application() {
     }
 
     public void execute() throws IOException {
 
-        ApplicationB app = new ApplicationB();
+        Application app = new Application();
         String fileOrowan = "Orowan_x64.exe";
 
         String path = app.getRessource(fileOrowan);
