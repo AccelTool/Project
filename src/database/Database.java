@@ -1,6 +1,8 @@
 package database;
 
 import org.h2.jdbcx.JdbcDataSource;
+import org.h2.tools.Server;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +15,17 @@ public class Database {
 
     Connection dbConnection;
     PreparedStatement insertion;
+
+    public Database() {
+    }
+
+    public void createServer() throws SQLException {
+        Server webServer = Server.createWebServer("-web", "-webAllowOthers","-tcp","-tcpAllowOthers", "-webPort", "25567","-browser");
+        webServer.start();
+
+    }
+
+
 
     // Etablit la connexion avec la base de données.
     // peut être long
