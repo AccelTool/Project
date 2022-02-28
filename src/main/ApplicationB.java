@@ -2,17 +2,26 @@ package main;
 
 import java.io.*;
 
-public class Application {
-    public static void main(String[] args) throws Exception {
+public class ApplicationB {
 
-        Application app = new Application();
+    public ApplicationB() {
+    }
+
+    public void execute() throws IOException {
+
+        ApplicationB app = new ApplicationB();
         String fileOrowan = "Orowan_x64.exe";
 
-        System.out.println("getResourceAsStream : " + fileOrowan);
         String path = app.getRessource(fileOrowan);
-        System.out.println(path);
+        System.out.println("path : " + path);
 
-        Process process = Runtime.getRuntime().exec(path);
+        Process process = null;
+        try {
+            process = Runtime.getRuntime().exec(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("process "+fileOrowan+" executed.\n");
 
         OutputStream stdin = process.getOutputStream();
         InputStream stdout = process.getInputStream();

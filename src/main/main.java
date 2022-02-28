@@ -1,8 +1,13 @@
 package main;
 
+import java.io.IOException;
+
 public class main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("Hello World!"); // Display the string.
+
+        ApplicationB application=new ApplicationB();
+        application.execute();
     }
 
     public static void moyenne(float[] coef) {
