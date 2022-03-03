@@ -9,7 +9,7 @@ public class Bouton {
     public Bouton(double hauteur, double largeur, String text){
         button = new Button(text);
         button.setPrefSize(largeur, hauteur);
-        button.setStyle("-fx-background-color: #50687d");
+        button.setStyle("-fx-background-color: #50687d; -fx-color: #fff");
     }
 
     public Button getButton() {
