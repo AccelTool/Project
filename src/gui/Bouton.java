@@ -6,8 +6,8 @@ import javafx.scene.control.Button;
 public class Bouton {
     Button button;
 
-    public Bouton(double hauteur, double largeur){
-        button = new Button();
+    public Bouton(double hauteur, double largeur, String text){
+        button = new Button(text);
         button.setPrefSize(largeur, hauteur);
         button.setStyle("-fx-background-color: #50687d");
     }
