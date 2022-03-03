@@ -38,7 +38,7 @@ public class Fenetre {
         //L'image du background (bg)
         Canvas cv = new Canvas(width, height);
         GraphicsContext gc = cv.getGraphicsContext2D();
-        gc.setFill(Color.LIGHTSTEELBLUE);
+        gc.setFill(new Color(184.0/255, 208.0/255, 230.0/255,1.0));
         gc.fillRect(0,0,width,height);
         gc.drawImage(rim_logo,50,50);
 
