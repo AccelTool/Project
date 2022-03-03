@@ -32,7 +32,7 @@ public class Application {
         String path_folder = path.substring(1, path.length()-fileOrowan.length());
 
         writer.write("i\nc\n");
-        writer.write(path_folder +"inv_cst.txt\n");
+        writer.write(path_folder +"inv.txt\n");
         writer.write(path_folder + "out.txt\n");
         writer.flush();
         writer.close();
