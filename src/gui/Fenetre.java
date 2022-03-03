@@ -1,6 +1,7 @@
 package gui;
 
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -54,12 +55,18 @@ public class Fenetre {
         drag.toFront();
 
         GridPane gridPane = new GridPane();
-
-        Bouton btn = new Bouton(50,100);
-        anchorPane.getChildren().add(btn.getButton());
-        btn.getButton().toFront();
-        anchorPane.setRightAnchor(btn.getButton(), 50.0);
-
+        gridPane.addRow(3);
+        gridPane.setVgap(10);
+        gridPane.setPrefSize(500,500);
+        gridPane.setMouseTransparent(true);
+        Bouton btnConnect = new Bouton(50,200,"Connect");
+        anchorPane.getChildren().add(gridPane);
+        anchorPane.setBottomAnchor(gridPane, 50.0);
+        anchorPane.setRightAnchor(gridPane, 50.0);
+        gridPane.add(btnConnect.getButton(),1,1);
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.toFront();
+        btnConnect.getButton().toFront();
 
         // Les deux MouseEvent suivants permettent de déplacer la fenêtre car elle est borderless
         drag.setOnMousePressed(new EventHandler<MouseEvent>() {
