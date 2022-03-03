@@ -7,6 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -52,6 +53,12 @@ public class Fenetre {
         anchorPane.setTopAnchor(drag,0.0);
         drag.toFront();
 
+        GridPane gridPane = new GridPane();
+
+        Bouton btn = new Bouton(50,100);
+        anchorPane.getChildren().add(btn.getButton());
+        btn.getButton().toFront();
+        anchorPane.setRightAnchor(btn.getButton(), 50.0);
 
 
         // Les deux MouseEvent suivants permettent de déplacer la fenêtre car elle est borderless
