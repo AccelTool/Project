@@ -7,9 +7,9 @@ public class test_db {
 
     public static void main(String[] args) throws IOException, SQLException {
         Database db = new Database();
-        db.createServer();
+        db.createTcpServer("8082");
         db.openDBConnection("localhost:8082");
-        db.createDB();
+        //db.createDB();
 
     }
 

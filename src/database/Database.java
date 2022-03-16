@@ -3,11 +3,7 @@ package database;
 import org.h2.jdbcx.JdbcDataSource;
 import org.h2.tools.Server;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -19,24 +15,33 @@ public class Database {
     public Database() {
     }
 
-    public void createServer() throws SQLException {
-        Server webServer = Server.createWebServer("-web", "-webAllowOthers","-tcp","-tcpAllowOthers", "-webPort", "8081","-tcpPort","8082");
+    public void createTcpServer(String port) throws SQLException {
+        Server tcpServer = Server.createWebServer("-tcp","-tcpAllowOthers","-tcpPort",port);
+        tcpServer.start();
+        System.out.println(tcpServer.getURL());
+
+    }
+
+    public void createServer(String port) throws SQLException {
+        Server webServer = Server.createWebServer("-web", "-webAllowOthers","-tcp","-tcpAllowOthers", "-webPort", port,"-tcpPort","8082");
         webServer.start();
 
     }
 
     // Etablit la connexion avec la base de données.
     // peut être long
-    public void openDBConnection(String ip)
-    {
+    public void openDBConnection(String ip) {
+
         JdbcDataSource dataSource = new JdbcDataSource();
         //tcp://"+ip+"
+        //dataSource.setURL("jdbc:h2:tcp://"+ip+"/~/test");
         dataSource.setURL("jdbc:h2:~/test");
         dataSource.setUser("sa");
         dataSource.setPassword("sa");
 
         try {
             dbConnection=dataSource.getConnection();
+            //dbConnection = DriverManager.getConnection("jdbc:h2:tcp://"+ip+"/~/test");
         } catch (SQLException e) {
             e.printStackTrace();
             System.exit(0);
