@@ -101,6 +101,10 @@ public class Fenetre2 {
         TextField tf2 = new TextField();
         TextField tf3 = new TextField();
 
+        tf1.setPromptText("URL");
+        tf2.setPromptText("User name");
+        tf3.setPromptText("Password");
+
         tf1.setStyle("-fx-background-color: #fff");
         tf2.setStyle("-fx-background-color: #fff");
         tf3.setStyle("-fx-background-color: #fff");
