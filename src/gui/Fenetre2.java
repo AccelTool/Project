@@ -101,7 +101,7 @@ public class Fenetre2 {
         TextField tf2 = new TextField();
         TextField tf3 = new TextField();
 
-        tf1.setStyle("-fx-background-color: #fff")
+        tf1.setStyle("-fx-background-color: #fff");
         tf2.setStyle("-fx-background-color: #fff");
         tf3.setStyle("-fx-background-color: #fff");
 
