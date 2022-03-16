@@ -59,12 +59,16 @@ public class Fenetre {
         gridPane.setVgap(10);
         gridPane.setPrefSize(500,500);
         gridPane.setMouseTransparent(true);
-        Bouton btnConnect = new Bouton(50,200,"Connect");
         anchorPane.getChildren().add(gridPane);
         anchorPane.setBottomAnchor(gridPane, 50.0);
         anchorPane.setRightAnchor(gridPane, 50.0);
-        gridPane.add(btnConnect.getButton(),1,1);
         gridPane.setAlignment(Pos.CENTER);
+
+        Bouton btnConnect = new Bouton(50.0,200.0,"Connect");
+        Bouton btnOpenServer= new Bouton(50.0,200.0,"Open Server");
+
+        gridPane.add(btnConnect.getButton(),1,1);
+        gridPane.add(btnOpenServer.getButton(),1,2);
         gridPane.toFront();
         btnConnect.getButton().toFront();
 
