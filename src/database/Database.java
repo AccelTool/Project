@@ -56,7 +56,8 @@ public class Database {
             System.exit(0);
         }
     }
-    //Initialise le PreparedStatement utilisé pour insérer des données.
+    //Initialise le PreparedStatement utilisé pour insérer des données. Toujours à exécuter avant
+    //insertEntree
     public void initInsertPreparedStatementEntrees() {
         // TODO Auto-generated method stub
         try {
