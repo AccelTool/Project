@@ -20,7 +20,7 @@ public class Database {
     }
 
     public void createServer() throws SQLException {
-        Server webServer = Server.createWebServer("-web", "-webAllowOthers","-tcp","-tcpAllowOthers", "-webPort", "25567","-browser");
+        Server webServer = Server.createWebServer("-web", "-webAllowOthers","-tcp","-tcpAllowOthers", "-webPort", "8081","-tcpPort","8082");
         webServer.start();
 
     }
@@ -30,7 +30,8 @@ public class Database {
     public void openDBConnection(String ip)
     {
         JdbcDataSource dataSource = new JdbcDataSource();
-        dataSource.setURL("jdbc:h2:tcp://"+ip+"/~/test");
+        //tcp://"+ip+"
+        dataSource.setURL("jdbc:h2:~/test");
         dataSource.setUser("sa");
         dataSource.setPassword("sa");
 
