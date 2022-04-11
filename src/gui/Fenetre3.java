@@ -2,6 +2,7 @@ package gui;
 
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -24,8 +25,9 @@ public class Fenetre3 {
         //create a window similar to Fenetre2
         //but with a different scene
         //and a different title
-        width = stage.getWidth();
-        height = stage.getHeight();
+        width = 1200;
+        height = 600;
+
         AnchorPane anchorPane = new AnchorPane();
         scene = new Scene(anchorPane, width, height);
         stage.initStyle(StageStyle.UNDECORATED); //Undecorated <=> borderless
@@ -37,11 +39,34 @@ public class Fenetre3 {
         drag(anchorPane, stage);
 
         anchorPane.setStyle("-fx-background: linear-gradient(to bottom, #616E7A, #B8D0E6, #8091A0)");
-        anchorPane.setStyle("-fx-background-radius: 10;");
-        anchorPane.setStyle("-fx-background-insets: 0,1,2,3,0;");
 
-        stage.setScene(scene);
-        stage.show();
+
+        //add a button to close the window
+        Button bClose = new Button("x");
+        bClose.setStyle("-fx-text-fill: #fff; -fx-font-size: 2.3em; -fx-background-color: transparent; -fx-cursor: hand");
+        bClose.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                stage.close();
+            }     });
+        bClose.setTranslateX(width-50);
+        bClose.setTranslateY(0);
+        anchorPane.getChildren().add(bClose);
+
+        //add a button to minimize the window
+        Button bMinimize = new Button("-");
+        bMinimize.setStyle("-fx-text-fill: #fff; -fx-font-size: 2.3em; -fx-font-weight: bold; -fx-background-color: transparent; -fx-cursor: hand");
+        bMinimize.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                stage.setIconified(true);
+            }
+        });
+        bMinimize.setTranslateX(width-100);
+        bMinimize.setTranslateY(0);
+        anchorPane.getChildren().add(bMinimize);
+
+
     }
 
     public Scene getScene() {

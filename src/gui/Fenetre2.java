@@ -107,10 +107,11 @@ public class Fenetre2 {
                     //Database db = new Database();
                     //db.createTcpServer("8082");
                     //db.openDBConnection("localhost:8082");
-                    Stage stage = new Stage();
-                    stage.setTitle("AccelTool");
-                    stage.setScene(new Fenetre3(stage, "AccelTool").getScene());
-                    stage.show();
+                    Stage stage2 = new Stage();
+                    stage2.setTitle("AccelTool");
+                    stage2.setScene(new Fenetre3(stage2, "AccelTool").getScene());
+                    stage2.show();
+                    stage.close();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
