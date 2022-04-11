@@ -1,5 +1,6 @@
 package gui;
 
+import database.Database;
 import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -33,7 +34,7 @@ public class Fenetre2 {
 
     public Fenetre2(Stage stage, String name){
 
-
+        // Création de la fenêtre
         width = 1200;
         height = 600;
         stage.initStyle(StageStyle.UNDECORATED); //Undecorated <=> borderless
@@ -98,6 +99,23 @@ public class Fenetre2 {
         Button bCreate = new Button("Create");
         bCreate.setStyle("-fx-text-fill: #50687D; -fx-font-size: 2.3em; -fx-font-weight: bold; -fx-background-color: transparent; -fx-cursor: hand");
         vbCreate.getChildren().add(bCreate);
+        //when pressing the create button, it will create the database and the tables, then open a new window
+        bCreate.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    //Database db = new Database();
+                    //db.createTcpServer("8082");
+                    //db.openDBConnection("localhost:8082");
+                    Stage stage = new Stage();
+                    stage.setTitle("AccelTool");
+                    stage.setScene(new Fenetre3(stage, "AccelTool").getScene());
+                    stage.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         TextField tf1 = new TextField();
         TextField tf2 = new TextField();
