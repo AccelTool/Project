@@ -31,6 +31,7 @@ public class Fenetre2 {
     private double yOffset = 0;
     private double width;
     private double height;
+    private Database db = new Database();
 
     public Fenetre2(Stage stage, String name){
 
@@ -104,9 +105,9 @@ public class Fenetre2 {
             @Override
             public void handle(MouseEvent event) {
                 try {
-                    //Database db = new Database();
-                    //db.createTcpServer("8082");
-                    //db.openDBConnection("localhost:8082");
+                    db.createTcpServer("8082");
+                    db.openDBConnection();
+                    db.createDB();
                     Stage stage2 = new Stage();
                     stage2.setTitle("AccelTool");
                     stage2.setScene(new Fenetre3(stage2, "AccelTool").getScene());
@@ -122,13 +123,6 @@ public class Fenetre2 {
         TextField tf2 = new TextField();
         TextField tf3 = new TextField();
 
-        bConnect.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                tf1.getCharacters();
-            }
-        });
-
         tf1.setPromptText("URL");
         tf2.setPromptText("User name");
         tf3.setPromptText("Password");
@@ -141,6 +135,46 @@ public class Fenetre2 {
         vbConnect.getChildren().add(tf2);
         vbConnect.getChildren().add(tf3);
 
+
+        bConnect.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                String url = "jdbc:h2:tcp://" + tf1.getText() + "/~/database";
+                String user = tf2.getText();
+                String password = tf3.getText();
+
+                System.out.println("Cette fonction n'a pas encore été implémentée pour l'instant");
+                System.out.println("Vous pouvez vous connecter en local avec le bouton \"Create\"");
+                //show in a pop-up a warning
+                Stage popUp = new Stage();
+                popUp.setTitle("Attention");
+                popUp.setScene(new Scene(new Label(" Cette fonctionnalité n'est pas encore implémentée,\n vous pouvez vous connecter en local avec le bouton \"Create\"")));
+                //set width and height of the pop-up
+                popUp.setWidth(350);
+                popUp.setHeight(100);
+                //set icon with warning on internet
+                popUp.getIcons().add(new Image("https://www.pngfind.com/pngs/m/47-478974_computer-icons-warning-sign-windows-10-download-warning.png"));
+                popUp.show();
+
+                /* WORK IN PROGRESS
+                try {
+                    System.out.println("Connexion à la base de données à l'adresse "+url);
+                    db.openDBConnection(url, user, password);
+                    System.out.println("Connexion réussie");
+                    Stage stage2 = new Stage();
+                    stage2.setTitle("AccelTool");
+                    stage2.setScene(new Fenetre3(stage2, "AccelTool").getScene());
+                    stage2.show();
+                    stage.close();
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println("Connexion échouée");
+                }
+                */
+            }
+        });
+
         //add a button to close the window
         Button bClose = new Button("x");
         bClose.setStyle("-fx-text-fill: #fff; -fx-font-size: 2.3em; -fx-background-color: transparent; -fx-cursor: hand");
@@ -148,7 +182,15 @@ public class Fenetre2 {
             @Override
             public void handle(MouseEvent event) {
                 stage.close();
-            }     });
+                //check if database is open
+                if (db.isOpen()) {
+                    db.closeDBConnection();
+                    db.closeServer();
+                }
+                if (db.isRunning()) {
+                    db.closeServer();
+                }
+            }});
         bClose.setTranslateX(width-50);
         bClose.setTranslateY(0);
         anchorPane.getChildren().add(bClose);
