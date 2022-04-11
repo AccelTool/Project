@@ -57,7 +57,7 @@ public class Fenetre2 {
         //hBox.setMouseTransparent(true);
 
         // anchorPane correspond au "root"
-        AnchorPane anchorPane = new AnchorPane(hBox);
+        AnchorPane anchorPane = new AnchorPane();
         drag(anchorPane, stage);
         scene = new Scene(anchorPane, width, height);
 
@@ -215,64 +215,6 @@ public class Fenetre2 {
 
 
 
-
-        /*
-        Bouton btnConnect = new Bouton(50,200,"Connect");
-        Button button = new Button("connect");
-        button.setPrefSize(200,50);
-        button.setStyle("-fx-text-fill: #fff; -fx-background-color: #6d44b8; -fx-font-weight: bold; -fx-cursor: pointer");
-        //button.setStyle("-fx-translate-y: 50px; -fx-animated: true");
-        button.toFront();
-        Button create = new Button("create");
-
-        create.setPrefSize(200,50);
-        create.setStyle("-fx-text-fill: #fff; -fx-background-color: #6d44b8; -fx-font-weight: bold; -fx-cursor: pointer");
-        //button.setStyle("-fx-translate-y: 50px; -fx-animated: true");
-        create.toFront();
-
-
-
-        TranslateTransition translate = new TranslateTransition();
-        translate.setNode(button);
-        translate.setDuration(Duration.seconds(1));
-        translate.setByY(50);
-        translate.play();
-
-        vBox.getChildren().add(button);
-        vBox.setSpacing(50);
-
-        VBox vBox1 = new VBox();
-        vBox1.setStyle("-fx-background-color: #eee; -fx-background-radius: 60%/10%");
-
-        vBox1.getChildren().add(create);
-
-        //vBox.getChildren().add(textField);
-        //vBox.getChildren().add(create);
-
-        TextField textField = new TextField("jlshv");
-
-        Label label = new Label("skdmhuv");
-
-        vBox.getChildren().add(vBox1);
-        vBox1.getChildren().add(label);
-        vBox1.getChildren().add(textField);
-
-        vBox1.setPadding(new Insets(0,0,0,0));
-
-        vBox1.setPrefSize(100,360);
-        vBox1.setPadding(new Insets(50,50,50,50));
-
-        hBox.setSpacing(250);
-        //vBox.setPadding(new Insets(50,50,50,50));
-
-        vBox.setStyle("-fx-background-radius: 20px; -fx-background-color: #50687D; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 50, 0.5, 0.0, 0.0)");
-
-        hBox.getChildren().add(vBox);
-        //hBox.getChildren().add(btnConnect.getButton());
-        hBox.setAlignment(Pos.CENTER);
-        btnConnect.getButton().toFront();
-
-*/
 
 
     }
