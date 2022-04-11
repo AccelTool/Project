@@ -14,5 +14,7 @@ public class InterfaceGraphique extends Application {
         Fenetre2 fn = new Fenetre2(primaryStage,"AccelTool");
         primaryStage.setScene(fn.getScene());
         primaryStage.show();
+
+
     }
 }

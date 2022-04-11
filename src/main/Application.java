@@ -43,6 +43,7 @@ public class Application {
             System.out.println(reading_str);
         }
 
+        
 
     }
 

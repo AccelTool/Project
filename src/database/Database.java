@@ -15,6 +15,7 @@ public class Database {
     public Database() {
     }
 
+
     public void createTcpServer(String port) throws SQLException {
         Server tcpServer = Server.createWebServer("-tcp","-tcpAllowOthers","-tcpPort",port);
         tcpServer.start();

@@ -20,6 +20,8 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 
 public class Fenetre2 {
 
@@ -101,6 +103,13 @@ public class Fenetre2 {
         TextField tf2 = new TextField();
         TextField tf3 = new TextField();
 
+        bConnect.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                tf1.getCharacters();
+            }
+        });
+
         tf1.setPromptText("URL");
         tf2.setPromptText("User name");
         tf3.setPromptText("Password");
@@ -112,6 +121,36 @@ public class Fenetre2 {
         vbConnect.getChildren().add(tf1);
         vbConnect.getChildren().add(tf2);
         vbConnect.getChildren().add(tf3);
+
+        //add a button to close the window
+        Button bClose = new Button("x");
+        bClose.setStyle("-fx-text-fill: #fff; -fx-font-size: 2.3em; -fx-background-color: transparent; -fx-cursor: hand");
+        bClose.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                stage.close();
+            }     });
+        bClose.setTranslateX(width-50);
+        bClose.setTranslateY(0);
+        anchorPane.getChildren().add(bClose);
+
+        //add a button to minimize the window
+        Button bMinimize = new Button("-");
+        bMinimize.setStyle("-fx-text-fill: #fff; -fx-font-size: 2.3em; -fx-font-weight: bold; -fx-background-color: transparent; -fx-cursor: hand");
+        bMinimize.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                stage.setIconified(true);
+            }
+        });
+        bMinimize.setTranslateX(width-100);
+        bMinimize.setTranslateY(0);
+        anchorPane.getChildren().add(bMinimize);
+
+
+
+
+
 
         /*
         Bouton btnConnect = new Bouton(50,200,"Connect");
@@ -196,6 +235,7 @@ public class Fenetre2 {
             }
         });
     }
+
 
 
 }
