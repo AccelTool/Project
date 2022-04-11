@@ -106,8 +106,12 @@ public class Fenetre2 {
             public void handle(MouseEvent event) {
                 try {
                     db.createTcpServer("8082");
+                    System.out.println("Serveur créé");
                     db.openDBConnection();
+                    System.out.println("Connexion à la base de données établie");
                     db.createDB();
+                    System.out.println("Base de données initialisée");
+
                     Stage stage2 = new Stage();
                     stage2.setTitle("AccelTool");
                     stage2.setScene(new Fenetre3(stage2, "AccelTool").getScene());
@@ -115,6 +119,7 @@ public class Fenetre2 {
                     stage.close();
                 } catch (Exception e) {
                     e.printStackTrace();
+                    System.out.println("Erreur lors de la création de la base de données");
                 }
             }
         });
@@ -145,18 +150,16 @@ public class Fenetre2 {
 
                 System.out.println("Cette fonction n'a pas encore été implémentée pour l'instant");
                 System.out.println("Vous pouvez vous connecter en local avec le bouton \"Create\"");
-                //show in a pop-up a warning
                 Stage popUp = new Stage();
                 popUp.setTitle("Attention");
                 popUp.setScene(new Scene(new Label(" Cette fonctionnalité n'est pas encore implémentée,\n vous pouvez vous connecter en local avec le bouton \"Create\"")));
-                //set width and height of the pop-up
                 popUp.setWidth(350);
                 popUp.setHeight(100);
-                //set icon with warning on internet
                 popUp.getIcons().add(new Image("https://www.pngfind.com/pngs/m/47-478974_computer-icons-warning-sign-windows-10-download-warning.png"));
                 popUp.show();
 
-                /* WORK IN PROGRESS
+                /* WORK IN PROGRESS | NOT WORKING | La connexion n'est pas possible avec une ip (autre que localhost)
+                   Nous avons essayé avec différents formats d'url, mais aucune solution n'a été trouvée
                 try {
                     System.out.println("Connexion à la base de données à l'adresse "+url);
                     db.openDBConnection(url, user, password);
