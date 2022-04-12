@@ -95,7 +95,7 @@ public class Database {
     public void initInsertPreparedStatementEntrees() {
         // TODO Auto-generated method stub
         try {
-            insertion=dbConnection.prepareStatement("INSERT INTO ENTREES(\"ID\", \"Case\", He, Hs, Te, Ts, Diam_WR, WRyoung, \"offset ini\", mu_ini, Force, G) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            insertion=dbConnection.prepareStatement("INSERT INTO ENTREES(\"ID\", \"Case\", He, Hs, Te, Ts, Diam_WR, WRyoung, \"offset ini\", mu_ini, Force, G) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         } catch (SQLException e) {
             e.printStackTrace();
             System.exit(0);
@@ -129,7 +129,7 @@ public class Database {
     public void initInsertPreparedStatementSorties() {
         // TODO Auto-generated method stub
         try {
-            insertion=dbConnection.prepareStatement("INSERT INTO SORTIES(id, \"case\", errors, offsetYield, friction, rolling_torque, sigma_moy, sigma_ini, sigma_out, sigma_max, force_error, slip_error, has_converged) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            insertion=dbConnection.prepareStatement("INSERT INTO SORTIES(id, \"case\", errors, offsetYield, friction, rolling_torque, sigma_moy, sigma_ini, sigma_out, sigma_max, force_error, slip_error, has_converged) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         } catch (SQLException e) {
             e.printStackTrace();
             System.exit(0);
@@ -165,22 +165,13 @@ public class Database {
 
         ArrayList<Object> parametres = new ArrayList<>();
 
-        // Utilisation d'une clause try-catch permettant de gérer les exceptions d'ouverture
-        // et de fermeture (automatique) d'une ressource (interface Closeable)
         try (Statement st = dbConnection.createStatement()) {
 
-            // Les requêtes de consultation sont éxécutées avec la méthode executeQuery.
-            // Cette méthode retourne une objet ResultSet contenant le résultat.
-            // Si cette requête est récurrente, il est possible d'utiliser un PreparedStatement.
-            ResultSet rs = st.executeQuery("select * from ENTREES where Id = id ");
+            ResultSet rs = st.executeQuery("select * from ENTREES where ID = id ");
 
-            //Itérateur. Retourne True quand il se positionne sur le tuple résultat suivant.
             while (rs.next())
             {
-                // De manière alternative, les méthodes get d'un ResultSet peuvent utiliser le nom de la colonne
-                // à la place de l'indice de la colonne sélectionnée dans la requête.
-                // En SQL, les indices démarrent à 1 et non 0.
-                parametres.add(rs.getInt("Id"));
+                parametres.add(rs.getInt("ID"));
                 parametres.add(rs.getInt("Case"));
                 parametres.add(rs.getFloat("He"));
                 parametres.add(rs.getFloat("Hs"));
@@ -220,7 +211,7 @@ public class Database {
                 // De manière alternative, les méthodes get d'un ResultSet peuvent utiliser le nom de la colonne
                 // à la place de l'indice de la colonne sélectionnée dans la requête.
                 // En SQL, les indices démarrent à 1 et non 0.
-                parametres.add(rs.getInt("Id"));
+                parametres.add(rs.getInt("ID"));
                 parametres.add(rs.getInt("Case"));
                 parametres.add(rs.getString("Errors"));
                 parametres.add(rs.getFloat("OffsetYield"));
