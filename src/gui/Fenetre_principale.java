@@ -1,5 +1,7 @@
 package gui;
 
+import database.Database;
+
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
