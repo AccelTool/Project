@@ -162,7 +162,7 @@ public class Database {
 
         ArrayList<Object> parametres = new ArrayList<>();
 
-        // Utilisation d'une clause try-ressource permettant de gérer les exceptions d'ouverture
+        // Utilisation d'une clause try-catch permettant de gérer les exceptions d'ouverture
         // et de fermeture (automatique) d'une ressource (interface Closeable)
         try (Statement st = dbConnection.createStatement()) {
 

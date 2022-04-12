@@ -21,6 +21,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import jdk.jfr.DataAmount;
+import main.Application;
 
 
 import java.awt.*;
@@ -44,6 +45,8 @@ public class Fenetre_principale {
 
     private static double oldX = 13;
     private static double oldY = -1;
+
+    Application application = new Application();
 
     public Fenetre_principale(Stage stage, String name){
 
@@ -137,6 +140,7 @@ public class Fenetre_principale {
             public void handle(MouseEvent event) {
                 clear(g);
                 charts.forEach(CanvasLineChart::update);
+
             }
         });
 
