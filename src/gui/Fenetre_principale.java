@@ -42,7 +42,7 @@ public class Fenetre_principale {
 
     private ArrayList<CanvasLineChart> charts = new ArrayList<>();
 
-    private static double oldX = -1;
+    private static double oldX = 13;
     private static double oldY = -1;
 
     public Fenetre_principale(Stage stage, String name){
@@ -103,16 +103,17 @@ public class Fenetre_principale {
 
         Canvas canvas = new Canvas(700, 200);
         GraphicsContext g = canvas.getGraphicsContext2D();
+
+        clear(g);
+
         pCanvas.setStyle("-fx-background-color: #eee; -fx-background-radius: 10px");
         pCanvas.setPadding(new Insets(0));
 
         pCanvas.getChildren().add(canvas);
 
-        charts.add(new CanvasLineChart(g, Color.RED, new RandomDataSource()));
-        charts.add(new CanvasLineChart(g, Color.GREEN, new RandomDataSource()));
-        charts.add(new CanvasLineChart(g, Color.BLUE, () -> Math.random() * 0.3));
-
-        g.clearRect(0, 0, 700, 200);
+        charts.add(new CanvasLineChart(g, Color.rgb(35, 46, 54), new RandomDataSource()));
+        charts.add(new CanvasLineChart(g, Color.rgb(0, 0, 0), new RandomDataSource()));
+        charts.add(new CanvasLineChart(g, Color.rgb(255, 36, 44), () -> Math.random() * 0.3));
 
         charts.forEach(CanvasLineChart::update);
 
@@ -134,7 +135,7 @@ public class Fenetre_principale {
         bStart.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                g.clearRect(0, 0, 700, 200);
+                clear(g);
                 charts.forEach(CanvasLineChart::update);
             }
         });
@@ -233,7 +234,7 @@ public class Fenetre_principale {
 
             buffer.addLast(value);
 
-            if (buffer.size() > 8){
+            if (buffer.size() > 10){
                 buffer.removeFirst();
             }
 
@@ -241,12 +242,12 @@ public class Fenetre_principale {
 
             buffer.forEach(y -> {
                 if (oldY > -1){
-                    g.strokeLine(oldX, oldY*200, oldX + 100, y*200);
-                    oldX = oldX +100;
+                    g.strokeLine(oldX, oldY*200, oldX + 70, y*200);
+                    oldX = oldX +70;
                 }
                 oldY = y;
             });
-            oldX = -1;
+            oldX = 12;
             oldY = -1;
         }
 
@@ -263,6 +264,19 @@ public class Fenetre_principale {
 
     private interface DataSource<T> {
         T getValue();
+    }
+
+    private void clear(GraphicsContext g){
+        g.clearRect(0, 0, 700, 200);
+        g.setStroke(Color.BLACK);
+
+        g.strokeLine(10, 10, 10, 190);
+        g.strokeLine(11, 10, 11, 190);
+        g.strokeLine(12, 10, 12, 190);
+
+        g.strokeLine(10, 190, 690, 190);
+        g.strokeLine(10, 189, 690, 189);
+        g.strokeLine(10, 188, 690, 188);
     }
 
 }
