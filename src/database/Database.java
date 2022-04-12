@@ -171,7 +171,7 @@ public class Database {
             // Les requêtes de consultation sont éxécutées avec la méthode executeQuery.
             // Cette méthode retourne une objet ResultSet contenant le résultat.
             // Si cette requête est récurrente, il est possible d'utiliser un PreparedStatement.
-            ResultSet rs = st.executeQuery("select * from ENTREES where CASE = id ");
+            ResultSet rs = st.executeQuery("select * from ENTREES where ID = id ");
 
             //Itérateur. Retourne True quand il se positionne sur le tuple résultat suivant.
             while (rs.next())
@@ -210,7 +210,7 @@ public class Database {
             // Les requêtes de consultation sont éxécutées avec la méthode executeQuery.
             // Cette méthode retourne une objet ResultSet contenant le résultat.
             // Si cette requête est récurrente, il est possible d'utiliser un PreparedStatement.
-            ResultSet rs = st.executeQuery("select * from SORTIES where CASE = cas ");
+            ResultSet rs = st.executeQuery("select * from SORTIES where ID = id ");
 
             //Itérateur. Retourne True quand il se positionne sur le tuple résultat suivant.
             while (rs.next())
