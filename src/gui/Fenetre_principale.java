@@ -123,7 +123,7 @@ public class Fenetre_principale {
 
         clear(g);
 
-        pCanvas.setStyle("-fx-background-color: #eee; -fx-background-radius: 10px");
+        pCanvas.setStyle("-fx-background-color: linear-gradient(from 0px 0px to 200px 700px, #cce0ff, #eee); -fx-background-radius: 10px; -fx-opacity: 0.5");
         pCanvas.setPadding(new Insets(0));
 
         pCanvas.getChildren().add(canvas);
@@ -136,7 +136,7 @@ public class Fenetre_principale {
 
         Pane pBlanc = new Pane();
         pBlanc.setPrefSize(700,100);
-        pBlanc.setStyle("-fx-background-color: #eee; -fx-background-radius: 10px");
+        pBlanc.setStyle("-fx-background-color: linear-gradient(from 0px 0px to 200px 700px, #cce0ff, #eee); -fx-background-radius: 10px; -fx-opacity: 0.5");
         pBlanc.setPadding(new Insets(30,50,0,50));
 
         Button bUpdate = new Button("Update Database");
