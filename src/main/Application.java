@@ -1,6 +1,7 @@
 package main;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class Application {
 
@@ -56,4 +57,10 @@ public class Application {
             System.out.println(reading_str);
         }
     }
+    /*
+    public void startSimulation(Database db, String inv_file,String out_file) throws IOException {
+        //Lis les lignes de SQL une par une, pour chaque ligne on update inv_file avec le contenu de la ligne et on lance Orowan
+
+    }
+    */
 }

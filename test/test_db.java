@@ -9,10 +9,10 @@ public class test_db {
         Database db = new Database();
         db.createTcpServer("8082");
         db.openDBConnection();
-        //db.createDB();
+        db.createDB();
         //db.dropDB();
 
-        //db.recupereEntree(1);
+        db.recupereEntree(1);
     }
 
 }
