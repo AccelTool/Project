@@ -12,7 +12,7 @@ public class test_db {
         //db.createDB();
         //db.dropDB();
 
-        db.recupereEntree(1);
+        //db.recupereEntree(1);
     }
 
 }
