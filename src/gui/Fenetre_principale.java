@@ -108,7 +108,8 @@ public class Fenetre_principale {
         bInitialise.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-
+                Application application = new Application(db);
+                application.initializeDB();
             }
         });
 
