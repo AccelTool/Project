@@ -105,12 +105,13 @@ public class Fenetre2 {
             @Override
             public void handle(MouseEvent event) {
                 try {
+                    /*
                     db.createTcpServer("8082");
                     System.out.println("Serveur créé");
                     db.openDBConnection();
                     System.out.println("Connexion à la base de données établie");
                     db.createDB();
-                    System.out.println("Base de données initialisée");
+                    System.out.println("Base de données initialisée");*/
 
                     Stage stage2 = new Stage();
                     stage2.setTitle("AccelTool");
