@@ -97,10 +97,10 @@ public class Fenetre2 {
         vbConnect.setMargin(bConnect, new Insets(10,0,0,0));
         //vbConnect.setStyle("-fx-background-color: red");
 
-        Button bCreate = new Button("Create");
+        Button bCreate = new Button("Start Server");
         bCreate.setStyle("-fx-text-fill: #50687D; -fx-font-size: 2.3em; -fx-font-weight: bold; -fx-background-color: transparent; -fx-cursor: hand");
         vbCreate.getChildren().add(bCreate);
-        //when pressing the create button, it will create the database and the tables, then open a new window
+        //when pressing the create button, it will open the server of the database, then open a new window
         bCreate.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -110,8 +110,6 @@ public class Fenetre2 {
                     System.out.println("Serveur créé");
                     db.openDBConnection();
                     System.out.println("Connexion à la base de données établie");
-                    //db.createDB();
-                    System.out.println("Base de données initialisée");
 
                     Stage stage2 = new Stage();
                     stage2.setTitle("AccelTool");
