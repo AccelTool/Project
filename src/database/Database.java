@@ -160,7 +160,7 @@ public class Database {
     }
 
     //Récupérer les données dans la table entrée
-    public Collection<Object> recupereEntree(int id) {
+    public ArrayList<Object> recupereEntree(int id) {
 
         ArrayList<Object> parametres = new ArrayList<>();
 
@@ -199,7 +199,7 @@ public class Database {
         return parametres;
     }
 
-    public Collection<Object> recupereSortie(int id) {
+    public ArrayList<Object> recupereSortie(int id) {
 
         ArrayList<Object> parametres = new ArrayList<>();
 
