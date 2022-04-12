@@ -1,5 +1,6 @@
 package gui;
 
+import database.Database;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -39,6 +40,8 @@ public class Fenetre_principale {
     private double width;
     private double height;
 
+    private Database db;
+
     public double coeff_frict = 999.99;
 
     private ArrayList<CanvasLineChart> charts = new ArrayList<>();
@@ -48,7 +51,9 @@ public class Fenetre_principale {
 
     Application application = new Application();
 
-    public Fenetre_principale(Stage stage, String name){
+    public Fenetre_principale(Stage stage, String name, Database db){
+
+        this.db = db;
 
         width = 1200;
         height = 600;
@@ -94,6 +99,15 @@ public class Fenetre_principale {
             @Override
             public void handle(MouseEvent event) {
                 imageIndicator(bIndicator);
+            }
+        });
+
+        Button bInitialise = new Button("Initialize database");
+        bInitialise.setStyle("-fx-text-fill: #fff; -fx-font-size: 1.5em; -fx-font-weight: bold; -fx-background-color: #354654; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 50, 0.5, 0.0, 0.0); -fx-cursor: hand");
+        bInitialise.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+
             }
         });
 
