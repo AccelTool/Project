@@ -114,7 +114,7 @@ public class Fenetre2 {
 
                     Stage stage2 = new Stage();
                     stage2.setTitle("AccelTool");
-                    stage2.setScene(new Fenetre3(stage2, "AccelTool").getScene());
+                    stage2.setScene(new Fenetre_principale(stage2, "AccelTool", db).getScene());
                     stage2.show();
                     stage.close();
                 } catch (Exception e) {

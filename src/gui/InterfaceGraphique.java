@@ -11,8 +11,8 @@ public class InterfaceGraphique extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Fenetre_principale fn = new Fenetre_principale(primaryStage,"AccelTool");
-        //Fenetre2 fn = new Fenetre2(primaryStage, "AccelTool");
+        //Fenetre_principale fn = new Fenetre_principale(primaryStage,"AccelTool");
+        Fenetre2 fn = new Fenetre2(primaryStage, "AccelTool");
         primaryStage.setScene(fn.getScene());
         primaryStage.show();
 
