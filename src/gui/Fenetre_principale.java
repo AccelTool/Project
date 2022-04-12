@@ -142,7 +142,12 @@ public class Fenetre_principale {
         Button bUpdate = new Button("Update Database");
         bUpdate.setStyle("-fx-text-fill: #fff; -fx-font-size: 1.5em; -fx-font-weight: bold; -fx-background-color: #354654; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 50, 0.5, 0.0, 0.0); -fx-cursor: hand");
 
-        vbAffichage.getChildren().addAll(pCanvas, pBlanc, bUpdate);
+        HBox hbButtonDB = new HBox();
+        hbButtonDB.setSpacing(15);
+
+        hbButtonDB.getChildren().addAll(bUpdate, bInitialise);
+
+        vbAffichage.getChildren().addAll(pCanvas, pBlanc, hbButtonDB);
 
         hBox.getChildren().addAll(vbAffichage, vbIndicator);
 
