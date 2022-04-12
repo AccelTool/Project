@@ -1,12 +1,17 @@
 package main;
 
+import database.Database;
+
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class main {
     public static void main(String[] args) throws IOException {
 
         Application application=new Application();
         application.execute();
+        Database database=new Database();
+        application.startSimulation(database, "invvv.txt","out.txt");
 
     }
 
