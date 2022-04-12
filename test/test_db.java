@@ -11,6 +11,8 @@ public class test_db {
         db.openDBConnection();
         //db.createDB();
         //db.dropDB();
+
+        db.recupereEntree(1);
     }
 
 }
