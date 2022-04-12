@@ -119,6 +119,13 @@ public class Fenetre2 {
                 } catch (Exception e) {
                     e.printStackTrace();
                     System.out.println("Erreur lors de la création de la base de données");
+                    Stage popUp = new Stage();
+                    popUp.setTitle("Attention");
+                    popUp.setScene(new Scene(new Label(" Erreur lors de la création de la base de données\n Veuillez vérifier que le port est libre ")));
+                    popUp.setWidth(350);
+                    popUp.setHeight(100);
+                    popUp.getIcons().add(new Image("https://www.pngfind.com/pngs/m/47-478974_computer-icons-warning-sign-windows-10-download-warning.png"));
+                    popUp.show();
                 }
             }
         });
