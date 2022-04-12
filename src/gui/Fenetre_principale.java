@@ -1,5 +1,6 @@
 package gui;
 
+import database.Database;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -47,9 +48,10 @@ public class Fenetre_principale {
     private static double oldY = -1;
 
     Application application = new Application();
+    Database db;
 
-    public Fenetre_principale(Stage stage, String name){
-
+    public Fenetre_principale(Stage stage, String name, Database db){
+        this.db = db;
         width = 1200;
         height = 600;
         stage.initStyle(StageStyle.UNDECORATED); //Undecorated <=> borderless
@@ -140,7 +142,11 @@ public class Fenetre_principale {
             public void handle(MouseEvent event) {
                 clear(g);
                 charts.forEach(CanvasLineChart::update);
-
+                ArrayList<Object> entrees;
+                //get the data from the database db using db.recupereEntree()
+                for (int i = 0; i < 10; i++) {
+                    entrees = db.recupereEntree(i);
+                }
             }
         });
 
