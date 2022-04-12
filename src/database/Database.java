@@ -103,7 +103,7 @@ public class Database {
     }
 
     // Insère une nouvelle ligne dans la table Sortie à l'aide du PreparedStatement
-    public void insertEntree(int id, int cas,float he, float hs, float te, float diam_wr, int wryoung, int offset, float mu_ini, float force, float g){
+    public void insertEntree(int id, int cas,float he, float hs, float te, float ts, float diam_wr, int wryoung, int offset, float mu_ini, float force, float g){
         try {
             // Fixe la valeur des paramètres de la requête avant exécution.
             // Les indices numériques sont numérotés à partir de 1 et non 0.
@@ -112,12 +112,13 @@ public class Database {
             insertion.setFloat(3, he);
             insertion.setFloat(4, hs);
             insertion.setFloat(5, te);
-            insertion.setFloat(6, diam_wr);
-            insertion.setInt(7, wryoung);
-            insertion.setInt(8, offset);
-            insertion.setFloat(9, mu_ini);
-            insertion.setFloat(10, force);
-            insertion.setFloat(11, g);
+            insertion.setFloat(6, ts);
+            insertion.setFloat(7, diam_wr);
+            insertion.setInt(8, wryoung);
+            insertion.setInt(9, offset);
+            insertion.setFloat(10, mu_ini);
+            insertion.setFloat(11, force);
+            insertion.setFloat(12, g);
             //L'exécution des requêtes de modification est déclenchée par la méthode executeUpdate
             insertion.executeUpdate();
         } catch (SQLException e) {
