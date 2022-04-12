@@ -9,9 +9,10 @@ public class main {
     public static void main(String[] args) throws IOException {
 
         Application application=new Application();
-        application.execute();
+        //application.execute();
         Database database=new Database();
-        application.startSimulation(database, "invvv.txt","out.txt");
+        ArrayList<Object> charts= new ArrayList<>();
+        application.startSimulation(database, "invvv.txt","outvvv.txt", charts);
 
     }
 
