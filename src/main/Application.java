@@ -125,7 +125,10 @@ public class Application {
             float force = Float.parseFloat(data.get(i)[9]);
             float g = Float.parseFloat(data.get(i)[10]);
 
+            db.openDBConnection();
+            db.initInsertPreparedStatementEntrees();
             db.insertEntree(i, cas, he, hs, te, ts, diam_wr, wryoug, offset, mu_ini, force, g);
+
         }
     }
 

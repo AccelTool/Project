@@ -95,7 +95,7 @@ public class Database {
     public void initInsertPreparedStatementEntrees() {
         // TODO Auto-generated method stub
         try {
-            insertion=dbConnection.prepareStatement("INSERT INTO ENTREES(\"ID\", \"Case\", He, Hs, Te, Ts, Diam_WR, WRyoung, \"offset ini\", mu_ini, Force, G) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            insertion=dbConnection.prepareStatement("INSERT INTO ENTREES(\"ID\", \"Case\", He, Hs, Te, Ts, Diam_WR, WRyoung, \"offset ini\", mu_ini, Force, G) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         } catch (SQLException e) {
             e.printStackTrace();
             System.exit(0);
