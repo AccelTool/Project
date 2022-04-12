@@ -94,46 +94,75 @@ public class Fenetre_principale {
             }
         });
 
-        vbIndicator.getChildren().addAll(lCoefFrict, bIndicator);
+        vbIndicator.getChildren().addAll(lCoefFrict);//, bIndicator);
 
         VBox vbAffichage = new VBox();
-        //vbAffichage.setSpacing(25);
+        vbAffichage.setSpacing(25);
 
-        Canvas canvas = new Canvas(700, 300);
+        Pane pCanvas = new Pane();
+
+        Canvas canvas = new Canvas(700, 200);
         GraphicsContext g = canvas.getGraphicsContext2D();
+        pCanvas.setStyle("-fx-background-color: #eee; -fx-background-radius: 10px");
+        pCanvas.setPadding(new Insets(0));
+
+        pCanvas.getChildren().add(canvas);
 
         charts.add(new CanvasLineChart(g, Color.RED, new RandomDataSource()));
         charts.add(new CanvasLineChart(g, Color.GREEN, new RandomDataSource()));
         charts.add(new CanvasLineChart(g, Color.BLUE, () -> Math.random() * 0.3));
 
-        AnimationTimer timer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                g.clearRect(0, 0, 700, 300);
+        g.clearRect(0, 0, 700, 200);
 
-                charts.forEach(CanvasLineChart::update);
-            }
-        };
-        timer.start();
+        charts.forEach(CanvasLineChart::update);
 
         Pane pBlanc = new Pane();
-        pBlanc.setPrefSize(700,200);
+        pBlanc.setPrefSize(700,100);
         pBlanc.setStyle("-fx-background-color: #eee; -fx-background-radius: 10px");
         pBlanc.setPadding(new Insets(30,50,0,50));
 
         Button bUpdate = new Button("Update Database");
         bUpdate.setStyle("-fx-text-fill: #fff; -fx-font-size: 1.5em; -fx-font-weight: bold; -fx-background-color: #354654; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 50, 0.5, 0.0, 0.0); -fx-cursor: hand");
 
-        vbAffichage.getChildren().addAll(canvas, pBlanc, bUpdate);
+        vbAffichage.getChildren().addAll(pCanvas, pBlanc, bUpdate);
 
         hBox.getChildren().addAll(vbAffichage, vbIndicator);
 
 
         Button bStart = new Button("Start Simulation");
         bStart.setStyle("-fx-text-fill: #fff; -fx-font-size: 3.9em; -fx-font-weight: bold; -fx-background-color: #354654; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 50, 0.5, 0.0, 0.0); -fx-cursor: hand");
-
+        bStart.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                g.clearRect(0, 0, 700, 200);
+                charts.forEach(CanvasLineChart::update);
+            }
+        });
 
         vBox.getChildren().addAll(hBox, bStart);
+
+        Button bClose = new Button("x");
+        bClose.setStyle("-fx-text-fill: #fff; -fx-font-size: 2.3em; -fx-background-color: transparent; -fx-cursor: hand");
+        bClose.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                stage.close();
+            }     });
+        bClose.setTranslateX(width-50);
+        bClose.setTranslateY(0);
+        anchorPane.getChildren().add(bClose);
+
+        Button bMinimize = new Button("-");
+        bMinimize.setStyle("-fx-text-fill: #fff; -fx-font-size: 2.3em; -fx-font-weight: bold; -fx-background-color: transparent; -fx-cursor: hand");
+        bMinimize.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                stage.setIconified(true);
+            }
+        });
+        bMinimize.setTranslateX(width-100);
+        bMinimize.setTranslateY(0);
+        anchorPane.getChildren().add(bMinimize);
 
     }
 
@@ -204,7 +233,7 @@ public class Fenetre_principale {
 
             buffer.addLast(value);
 
-            if (buffer.size() > 800){
+            if (buffer.size() > 8){
                 buffer.removeFirst();
             }
 
@@ -212,9 +241,9 @@ public class Fenetre_principale {
 
             buffer.forEach(y -> {
                 if (oldY > -1){
-                    g.strokeLine(oldX, oldY*600, oldX + 1, y*600);
+                    g.strokeLine(oldX, oldY*200, oldX + 100, y*200);
+                    oldX = oldX +100;
                 }
-                oldX = oldX +1;
                 oldY = y;
             });
             oldX = -1;
