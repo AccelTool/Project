@@ -1,6 +1,5 @@
 package gui;
 
-import database.Database;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -40,6 +39,8 @@ public class Fenetre_principale {
     private double width;
     private double height;
 
+    private Database db;
+
     public double coeff_frict = 999.99;
 
     private ArrayList<CanvasLineChart> charts = new ArrayList<>();
@@ -48,10 +49,11 @@ public class Fenetre_principale {
     private static double oldY = -1;
 
     Application application = new Application();
-    Database db;
 
     public Fenetre_principale(Stage stage, String name, Database db){
+
         this.db = db;
+
         width = 1200;
         height = 600;
         stage.initStyle(StageStyle.UNDECORATED); //Undecorated <=> borderless
@@ -99,6 +101,15 @@ public class Fenetre_principale {
             }
         });
 
+        Button bInitialise = new Button("Initialize database");
+        bInitialise.setStyle("-fx-text-fill: #fff; -fx-font-size: 1.5em; -fx-font-weight: bold; -fx-background-color: #354654; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 50, 0.5, 0.0, 0.0); -fx-cursor: hand");
+        bInitialise.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+
+            }
+        });
+
         vbIndicator.getChildren().addAll(lCoefFrict);//, bIndicator);
 
         VBox vbAffichage = new VBox();
@@ -130,7 +141,12 @@ public class Fenetre_principale {
         Button bUpdate = new Button("Update Database");
         bUpdate.setStyle("-fx-text-fill: #fff; -fx-font-size: 1.5em; -fx-font-weight: bold; -fx-background-color: #354654; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 50, 0.5, 0.0, 0.0); -fx-cursor: hand");
 
-        vbAffichage.getChildren().addAll(pCanvas, pBlanc, bUpdate);
+        HBox hbButtonDB = new HBox();
+        hbButtonDB.setSpacing(15);
+
+        hbButtonDB.getChildren().addAll(bUpdate, bInitialise);
+
+        vbAffichage.getChildren().addAll(pCanvas, pBlanc, hbButtonDB);
 
         hBox.getChildren().addAll(vbAffichage, vbIndicator);
 
