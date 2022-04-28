@@ -11,26 +11,11 @@ import java.util.ArrayList;
 public class Application {
     private Database db;
     String fileOrowan = "Orowan_x64.exe";
-    String path;
 
     public Application(Database db) {
         this.db = db;
-        path = "./resources/inv_cst.txt";
     }
 
-    public void execute() throws IOException {
-
-        Application app = new Application(db);
-
-        String path = app.getRessource(fileOrowan);
-
-        System.out.println("path : " + path);
-
-        String path_folder = path.substring(1, path.length()-fileOrowan.length());
-
-        launchOrowan("inv.txt", "out2.txt", path, path_folder);
-
-    }
 
     private String getRessource(String fileName) {
         //adapted from https://mkyong.com/java/java-read-a-file-from-resources-folder/
@@ -39,7 +24,7 @@ public class Application {
 
     }
 
-    private void launchOrowan(String inv_file, String out_file, String path, String path_folder) throws IOException {
+    private void launchOrowan(String path_inv, String path_out, String path) throws IOException {
 
         Process process = null;
         try {
@@ -56,8 +41,8 @@ public class Application {
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(stdin));
 
         writer.write("i\nc\n");
-        writer.write(path_folder +inv_file+"\n");
-        writer.write(path_folder + out_file+"\n");
+        writer.write( path_inv.substring(1, path_inv.length())+"\n");
+        writer.write(path_out.substring(1, path_out.length())+"\n");
         writer.flush();
         writer.close();
 
@@ -73,6 +58,8 @@ public class Application {
         Application app = new Application(db);
 
         String path = app.getRessource(fileOrowan);
+        String path_inv = app.getRessource(inv_file);
+        String path_out = app.getRessource(out_file);
 
         System.out.println("path : " + path);
         System.out.println(id);
@@ -97,12 +84,12 @@ public class Application {
             path_folder = path_folder;//+"resources/";
             //System.out.println("-----"+path_folder);
             //delete the file if it exists
-            File file = new File(path_folder+inv_file);
+            File file = new File(path_inv);
             if (file.exists()) {
                 file.delete();
             }
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream(path_folder+inv_file, true), "utf-8"));
+                    new FileOutputStream(path_inv, true), "utf-8"));
             writer.write("Cas	He	Hs	Te	Ts	Diam_WR	WRyoung	offset ini	mu_ini	Force	G\n");
             writer.write(entree.get(1).toString()+"\t"+entree.get(2).toString()+"\t"+entree.get(3).toString()+"\t"+entree.get(4).toString()+"\t"+entree.get(5).toString()+"\t"+entree.get(6).toString()+"\t"+entree.get(7).toString()+"\t"+entree.get(8).toString()+"\t"+entree.get(9).toString()+"\t"+entree.get(10).toString()+"\t"+entree.get(11).toString()+"\n");
             writer.close();
@@ -110,7 +97,7 @@ public class Application {
 
 
             //launch Orowan
-            launchOrowan(inv_file,out_file,path,path_folder);
+            launchOrowan(path_inv,path_out,path);
 
 
             //get the output data from out_file
@@ -153,8 +140,11 @@ public class Application {
     }
 
 
-    public void initializeDB(){
-        File file = new File("C:\\Users\\fafou\\IdeaProjects\\Project\\src\\resources\\inv_cst.txt");
+    public void initializeDB(Database db){
+        Application app = new Application(db);
+        String path_inv = app.getRessource("inv_cst.txt");
+
+        File file = new File(path_inv);
         //System.out.println(file.length());
         ArrayList<String[]> data = tsvr(file);
 

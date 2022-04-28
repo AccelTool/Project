@@ -112,7 +112,7 @@ public class Fenetre_principale {
         bInitialise.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                application.initializeDB();
+                application.initializeDB(db);
             }
         });
 
@@ -145,7 +145,7 @@ public class Fenetre_principale {
                 if (t > 1){
                     clear(g);
                     try {
-                        boolean bool = application.startSimulation(db, "invvv.txt","outvvv.txt", charts, id);
+                        boolean bool = application.startSimulation(db, "inv_one_line.txt","out_one_line.txt", charts, id);
                         id++;
 
                         coeff_frict = charts.get(0).getLast();
