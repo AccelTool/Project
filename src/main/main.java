@@ -8,11 +8,13 @@ import java.util.ArrayList;
 public class main {
     public static void main(String[] args) throws IOException {
 
-        Application application=new Application();
+        //Application application=new Application(db);
         //application.execute();
         Database database=new Database();
         ArrayList<Object> charts= new ArrayList<>();
-        application.startSimulation(database, "invvv.txt","outvvv.txt", charts);
+        //application.startSimulation(database, "invvv.txt","outvvv.txt", charts);
+
+
 
     }
 

@@ -165,10 +165,13 @@ public class Database {
 
         ArrayList<Object> parametres = new ArrayList<>();
 
+        System.out.println("---------");
+        System.out.println(id);
+
         try (Statement st = dbConnection.createStatement()) {
 
-            ResultSet rs = st.executeQuery("select * from ENTREES where ID = id ");
-
+            ResultSet rs = st.executeQuery("select * from ENTREES where ID = " + id);
+            System.out.println(rs);
             while (rs.next())
             {
                 parametres.add(rs.getInt("ID"));
@@ -184,6 +187,8 @@ public class Database {
                 parametres.add(rs.getFloat("Force"));
                 parametres.add(rs.getFloat("G"));
             }
+
+            System.out.println(parametres);
 
         }
         catch (SQLException e) {
@@ -203,7 +208,7 @@ public class Database {
             // Les requêtes de consultation sont éxécutées avec la méthode executeQuery.
             // Cette méthode retourne une objet ResultSet contenant le résultat.
             // Si cette requête est récurrente, il est possible d'utiliser un PreparedStatement.
-            ResultSet rs = st.executeQuery("select * from SORTIES where ID = id ");
+            ResultSet rs = st.executeQuery("select * from SORTIES where ID = " + id);
 
             //Itérateur. Retourne True quand il se positionne sur le tuple résultat suivant.
             while (rs.next())

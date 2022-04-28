@@ -1,8 +1,11 @@
 package main;
 
 import database.Database;
+import gui.CanvasLineChart;
+import gui.Fenetre_principale;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Application {
@@ -15,12 +18,9 @@ public class Application {
         path = "./resources/inv_cst.txt";
     }
 
-    public Application() {
-    }
-
     public void execute() throws IOException {
 
-        Application app = new Application();
+        Application app = new Application(db);
 
         String path = app.getRessource(fileOrowan);
 
@@ -68,43 +68,34 @@ public class Application {
         }
     }
 
-    public void startSimulation(Database db, String inv_file,String out_file, ArrayList<Object> charts) throws IOException {
+    public boolean startSimulation(Database db, String inv_file,String out_file, ArrayList<CanvasLineChart> charts, int id) throws IOException {
 
-        Application app = new Application();
+        Application app = new Application(db);
 
         String path = app.getRessource(fileOrowan);
 
         System.out.println("path : " + path);
+        System.out.println(id);
 
         String path_folder = path.substring(1, path.length()-fileOrowan.length());
 
-
-
-
         //Lis les lignes de SQL une par une, pour chaque ligne on update inv_file avec le contenu de la ligne et on lance Orowan
         ArrayList<Object> entree = new ArrayList<>();
-        entree.add(0,1);
+        //entree.add(0,1);
+        //entree = db.recupereEntree(1);
+        //int i = 2;
+        entree = db.recupereEntree(id);
+
         if (entree.isEmpty()== false) { // replace by while later
-            //entree = db.recupereEntree(1);
-            entree.add(0,1); //1	1   30.223	17.934	0	5.567	690.742	210000	200	0.2	1482.582651	6.7
-            entree.add(1,1);
-            entree.add(2,30.223);
-            entree.add(3,17.934);
-            entree.add(4,0);
-            entree.add(5,5.567);
-            entree.add(6,690.742);
-            entree.add(7,210000);
-            entree.add(8,200);
-            entree.add(9,0.2);
-            entree.add(10,1482.582651);
-            entree.add(11,6.7);
+            //System.out.println(entree);
+            //i++;
 
             //entree contains ID    Cas	He	Hs	Te	Ts	Diam_WR	WRyoung	offset ini	mu_ini	Force	G
             //we want to write into inv_file the header "Cas	He	Hs	Te	Ts	Diam_WR	WRyoung	offset ini	mu_ini	Force	G"
             //then the content of entree
-            System.out.println("-----"+path_folder);
-            path_folder = path_folder+"resources/";
-            System.out.println("-----"+path_folder);
+            //System.out.println("-----"+path_folder);
+            path_folder = path_folder;//+"resources/";
+            //System.out.println("-----"+path_folder);
             //delete the file if it exists
             File file = new File(path_folder+inv_file);
             if (file.exists()) {
@@ -146,15 +137,19 @@ public class Application {
             sortie.add(10,split[10]);
             sortie.add(11,split[11]);
 
-            System.out.println(sortie);
+            //System.out.println(sortie);
 
             Double friction = Double.parseDouble(sortie.get(3).toString());
             Double rolling_torque = Double.parseDouble(sortie.get(4).toString());
+            System.out.println("friction = " + friction);
+            System.out.println("rolling torque =" + rolling_torque);
             // ajouter friciton et rolling torque a la courbe
+            charts.get(0).update(friction);
+            charts.get(1).update(rolling_torque);
 
-
-
+            return false;
         }
+        return true;
     }
 
 

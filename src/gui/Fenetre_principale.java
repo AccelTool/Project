@@ -27,6 +27,7 @@ import main.Application;
 
 
 import java.awt.*;
+import java.io.IOException;
 import java.sql.Array;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -47,14 +48,17 @@ public class Fenetre_principale {
 
     private ArrayList<CanvasLineChart> charts = new ArrayList<>();
 
-    private static double oldX = 13;
-    private static double oldY = -1;
+    private double t = 0.0;
+    private int id = 1;
 
-    Application application = new Application();
+
+
+    Application application;
 
     public Fenetre_principale(Stage stage, String name, Database db){
 
         this.db = db;
+        application = new Application(db);
 
         width = 1200;
         height = 600;
@@ -88,7 +92,7 @@ public class Fenetre_principale {
         vbIndicator.setAlignment(Pos.CENTER);
         vbIndicator.setSpacing(70);
 
-        Label lCoefFrict = new Label("Coeffcient de friction :\n" + coeff_frict);
+        Label lCoefFrict = new Label("Friction Coefficient :\n" + coeff_frict);
         lCoefFrict.setPrefSize(220,70);
         lCoefFrict.setStyle("-fx-text-fill: #354654; -fx-font-size: 1.5em; -fx-font-weight: bold; -fx-background-color: #fff; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 50, 0.5, 0.0, 0.0); -fx-text-alignment: center");
         lCoefFrict.setAlignment(Pos.CENTER);
@@ -108,12 +112,11 @@ public class Fenetre_principale {
         bInitialise.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                Application application = new Application(db);
                 application.initializeDB();
             }
         });
 
-        vbIndicator.getChildren().addAll(lCoefFrict);//, bIndicator);
+        vbIndicator.getChildren().addAll(lCoefFrict, bIndicator);
 
         VBox vbAffichage = new VBox();
         vbAffichage.setSpacing(25);
@@ -130,11 +133,36 @@ public class Fenetre_principale {
 
         pCanvas.getChildren().add(canvas);
 
-        charts.add(new CanvasLineChart(g, Color.rgb(35, 46, 54), new RandomDataSource()));
-        charts.add(new CanvasLineChart(g, Color.rgb(0, 0, 0), new RandomDataSource()));
-        charts.add(new CanvasLineChart(g, Color.rgb(255, 36, 44), () -> Math.random() * 0.3));
 
-        charts.forEach(CanvasLineChart::update);
+        charts.add(new CanvasLineChart(g, Color.rgb(0, 0, 255)));
+        charts.add(new CanvasLineChart(g, Color.rgb(255, 0, 0)));
+
+        AnimationTimer timer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                t += 0.016;
+
+                if (t > 1){
+                    clear(g);
+                    try {
+                        boolean bool = application.startSimulation(db, "invvv.txt","outvvv.txt", charts, id);
+                        id++;
+
+                        coeff_frict = charts.get(0).getLast();
+                        lCoefFrict.setText("Friction Coefficient :\n" + coeff_frict);
+
+                        if (bool){
+                            this.stop();
+                        }
+
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    t = 0.0;
+                }
+
+            }
+        };
 
         Pane pBlanc = new Pane();
         pBlanc.setPrefSize(700,100);
@@ -160,9 +188,9 @@ public class Fenetre_principale {
             @Override
             public void handle(MouseEvent event) {
                 clear(g);
-                charts.forEach(CanvasLineChart::update);
                 //get the data from the database db using db.recupereEntree()
-                //application.startSimulation();
+                id = 1;
+                timer.start();
 
             }
         });
@@ -241,56 +269,6 @@ public class Fenetre_principale {
 
         bIndicator.setPrefSize(50,50);
 
-    }
-
-    private static class CanvasLineChart {
-        private GraphicsContext g;
-        private Color color;
-        private DataSource<Double> dataSource;
-
-        private Deque<Double> buffer = new ArrayDeque<>();
-
-        public CanvasLineChart(GraphicsContext g, Color color, DataSource<Double> dataSource) {
-            this.g = g;
-            this.color = color;
-            this.dataSource = dataSource;
-        }
-
-        public void update() {
-            double value = dataSource.getValue();
-
-            buffer.addLast(value);
-
-            if (buffer.size() > 10){
-                buffer.removeFirst();
-            }
-
-            g.setStroke(color);
-
-            buffer.forEach(y -> {
-                if (oldY > -1){
-                    g.strokeLine(oldX, oldY*200, oldX + 70, y*200);
-                    oldX = oldX +70;
-                }
-                oldY = y;
-            });
-            oldX = 12;
-            oldY = -1;
-        }
-
-    }
-
-    private static  class RandomDataSource implements DataSource<Double> {
-        private Random random = new Random();
-
-        @Override
-        public Double getValue() {
-            return random.nextDouble();
-        }
-    }
-
-    private interface DataSource<T> {
-        T getValue();
     }
 
     private void clear(GraphicsContext g){
