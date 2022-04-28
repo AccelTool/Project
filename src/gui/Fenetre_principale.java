@@ -150,6 +150,7 @@ public class Fenetre_principale {
 
                         coeff_frict = charts.get(0).getLast();
                         lCoefFrict.setText("Friction Coefficient :\n" + coeff_frict);
+                        imageIndicator(bIndicator);
 
                         if (bool){
                             this.stop();
@@ -247,13 +248,13 @@ public class Fenetre_principale {
 
     private void imageIndicator(Button bIndicator){
 
-        if (coeff_frict < 100){
+        if (coeff_frict < 0.14){
             String url_rouge = getClass().getResource("/resources/images/indicateur_rouge.png").toExternalForm();
             Image iIndic_rouge = new Image(url_rouge);
             ImageView iVIndic_rouge = new ImageView();
             iVIndic_rouge.setImage(iIndic_rouge);
             bIndicator.setGraphic(iVIndic_rouge);
-        } else if (coeff_frict < 200) {
+        } else if (coeff_frict < 0.16) {
             String url_jaune = getClass().getResource("/resources/images/indicateur_jaune.png").toExternalForm();
             Image iIndic_jaune = new Image(url_jaune);
             ImageView iVIndic_jaune = new ImageView();

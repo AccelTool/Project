@@ -144,8 +144,8 @@ public class Application {
             System.out.println("friction = " + friction);
             System.out.println("rolling torque =" + rolling_torque);
             // ajouter friciton et rolling torque a la courbe
-            charts.get(0).update(friction);
-            charts.get(1).update(rolling_torque);
+            charts.get(0).update(friction, 200);
+            charts.get(1).update(rolling_torque, 0.002);
 
             return false;
         }

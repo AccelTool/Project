@@ -23,7 +23,7 @@ public class CanvasLineChart {
         this.color = color;
     }
 
-    public void update(double value) {
+    public void update(double value, double multiplier) {
 
         buffer.addLast(value);
 
@@ -35,7 +35,7 @@ public class CanvasLineChart {
 
         buffer.forEach(y -> {
             if (oldY > -1){
-                g.strokeLine(oldX, oldY*200, oldX + 70, y*200);
+                g.strokeLine(oldX, 200-oldY*multiplier, oldX + 70, 200-y*multiplier);
                 oldX = oldX +70;
             }
             oldY = y;
