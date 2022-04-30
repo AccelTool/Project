@@ -116,6 +116,18 @@ public class Fenetre_principale {
             }
         });
 
+        //add a button to creat tables
+        Button bCreateTables = new Button("Create tables");
+        bCreateTables.setStyle("-fx-text-fill: #fff; -fx-font-size: 1.5em; -fx-font-weight: bold; -fx-background-color: #354654; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 50, 0.5, 0.0, 0.0); -fx-cursor: hand");
+        bCreateTables.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                application.createTables(db);
+            }
+        });
+
+
+
         vbIndicator.getChildren().addAll(lCoefFrict, bIndicator);
 
         VBox vbAffichage = new VBox();
@@ -176,7 +188,7 @@ public class Fenetre_principale {
         HBox hbButtonDB = new HBox();
         hbButtonDB.setSpacing(15);
 
-        hbButtonDB.getChildren().addAll(bUpdate, bInitialise);
+        hbButtonDB.getChildren().addAll(bUpdate, bInitialise, bCreateTables);
 
         vbAffichage.getChildren().addAll(pCanvas, pBlanc, hbButtonDB);
 

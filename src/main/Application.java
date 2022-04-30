@@ -181,4 +181,8 @@ public class Application {
         }
         return Data;
     }
+
+    public void createTables(Database db) {
+        db.createDB();
+    }
 }
