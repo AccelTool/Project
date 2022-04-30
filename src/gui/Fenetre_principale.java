@@ -95,7 +95,7 @@ public class Fenetre_principale {
 
         Label lCoefFrict = new Label("Friction Coefficient :\n" + coeff_frict);
         lCoefFrict.setPrefSize(220,70);
-        lCoefFrict.setStyle("-fx-text-fill: #354654; -fx-font-size: 1.5em; -fx-font-weight: bold; -fx-background-color: #fff; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0); -fx-text-alignment: center");
+        lCoefFrict.setStyle("-fx-text-fill: #354654; -fx-font-size: 1.5em; -fx-font-weight: bold; -fx-background-color: #fff; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.5, 0.0, 0.0); -fx-text-alignment: center");
         lCoefFrict.setAlignment(Pos.CENTER);
 
         Button bIndicator = new Button();
@@ -109,7 +109,7 @@ public class Fenetre_principale {
         });
 
         Button bInitialise = new Button("Initialize database");
-        bInitialise.setStyle("-fx-text-fill: #fff; -fx-font-size: 1.5em; -fx-font-weight: bold; -fx-background-color: #354654; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0); -fx-cursor: hand");
+        bInitialise.setStyle("-fx-text-fill: #fff; -fx-font-size: 1.5em; -fx-font-weight: bold; -fx-background-color: #354654; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.5, 0.0, 0.0); -fx-cursor: hand");
         bInitialise.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -119,7 +119,7 @@ public class Fenetre_principale {
 
         //add a button to creat tables
         Button bCreateTables = new Button("Create tables");
-        bCreateTables.setStyle("-fx-text-fill: #fff; -fx-font-size: 1.5em; -fx-font-weight: bold; -fx-background-color: #354654; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0); -fx-cursor: hand");
+        bCreateTables.setStyle("-fx-text-fill: #fff; -fx-font-size: 1.5em; -fx-font-weight: bold; -fx-background-color: #354654; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.5, 0.0, 0.0); -fx-cursor: hand");
         bCreateTables.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -200,7 +200,7 @@ public class Fenetre_principale {
         pBlanc.getChildren().add(hbLabel);
 
         Button bUpdate = new Button("Update Database");
-        bUpdate.setStyle("-fx-text-fill: #fff; -fx-font-size: 1.5em; -fx-font-weight: bold; -fx-background-color: #354654; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0); -fx-cursor: hand");
+        bUpdate.setStyle("-fx-text-fill: #fff; -fx-font-size: 1.5em; -fx-font-weight: bold; -fx-background-color: #354654; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.5, 0.0, 0.0); -fx-cursor: hand");
 
         HBox hbButtonDB = new HBox();
         hbButtonDB.setSpacing(15);
@@ -213,7 +213,7 @@ public class Fenetre_principale {
 
 
         Button bStart = new Button("Start Simulation");
-        bStart.setStyle("-fx-text-fill: #fff; -fx-font-size: 3.9em; -fx-font-weight: bold; -fx-background-color: #354654; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0); -fx-cursor: hand");
+        bStart.setStyle("-fx-text-fill: #fff; -fx-font-size: 3.9em; -fx-font-weight: bold; -fx-background-color: #354654; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.5, 0.0, 0.0); -fx-cursor: hand");
         bStart.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
