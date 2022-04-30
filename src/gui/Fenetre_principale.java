@@ -20,6 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import jdk.jfr.DataAmount;
@@ -94,7 +95,7 @@ public class Fenetre_principale {
 
         Label lCoefFrict = new Label("Friction Coefficient :\n" + coeff_frict);
         lCoefFrict.setPrefSize(220,70);
-        lCoefFrict.setStyle("-fx-text-fill: #354654; -fx-font-size: 1.5em; -fx-font-weight: bold; -fx-background-color: #fff; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 50, 0.5, 0.0, 0.0); -fx-text-alignment: center");
+        lCoefFrict.setStyle("-fx-text-fill: #354654; -fx-font-size: 1.5em; -fx-font-weight: bold; -fx-background-color: #fff; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0); -fx-text-alignment: center");
         lCoefFrict.setAlignment(Pos.CENTER);
 
         Button bIndicator = new Button();
@@ -108,7 +109,7 @@ public class Fenetre_principale {
         });
 
         Button bInitialise = new Button("Initialize database");
-        bInitialise.setStyle("-fx-text-fill: #fff; -fx-font-size: 1.5em; -fx-font-weight: bold; -fx-background-color: #354654; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 50, 0.5, 0.0, 0.0); -fx-cursor: hand");
+        bInitialise.setStyle("-fx-text-fill: #fff; -fx-font-size: 1.5em; -fx-font-weight: bold; -fx-background-color: #354654; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0); -fx-cursor: hand");
         bInitialise.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -118,7 +119,7 @@ public class Fenetre_principale {
 
         //add a button to creat tables
         Button bCreateTables = new Button("Create tables");
-        bCreateTables.setStyle("-fx-text-fill: #fff; -fx-font-size: 1.5em; -fx-font-weight: bold; -fx-background-color: #354654; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 50, 0.5, 0.0, 0.0); -fx-cursor: hand");
+        bCreateTables.setStyle("-fx-text-fill: #fff; -fx-font-size: 1.5em; -fx-font-weight: bold; -fx-background-color: #354654; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0); -fx-cursor: hand");
         bCreateTables.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -180,10 +181,26 @@ public class Fenetre_principale {
         Pane pBlanc = new Pane();
         pBlanc.setPrefSize(700,100);
         pBlanc.setStyle("-fx-background-color: linear-gradient(from 0px 0px to 200px 700px, #cce0ff, #eee); -fx-background-radius: 10px; -fx-opacity: 0.5");
-        pBlanc.setPadding(new Insets(30,50,0,50));
+        pBlanc.setPadding(new Insets(100,200,0,50));
+
+        HBox hbLabel = new HBox();
+        hbLabel.setPadding(new Insets(40, 0, 0,150));
+
+        Label lLegCoef = new Label("Friction Coefficient");
+        Label lLegRolling = new Label("Rolling Torque");
+
+        lLegCoef.setStyle("-fx-text-fill: #00f; -fx-font-size: 1.5em; -fx-font-weight: bold;");
+        lLegRolling.setStyle("-fx-text-fill: #f00; -fx-font-size: 1.5em; -fx-font-weight: bold;");
+
+
+        hbLabel.getChildren().addAll(lLegCoef, lLegRolling);
+
+        hbLabel.setSpacing(100);
+
+        pBlanc.getChildren().add(hbLabel);
 
         Button bUpdate = new Button("Update Database");
-        bUpdate.setStyle("-fx-text-fill: #fff; -fx-font-size: 1.5em; -fx-font-weight: bold; -fx-background-color: #354654; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 50, 0.5, 0.0, 0.0); -fx-cursor: hand");
+        bUpdate.setStyle("-fx-text-fill: #fff; -fx-font-size: 1.5em; -fx-font-weight: bold; -fx-background-color: #354654; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0); -fx-cursor: hand");
 
         HBox hbButtonDB = new HBox();
         hbButtonDB.setSpacing(15);
@@ -196,7 +213,7 @@ public class Fenetre_principale {
 
 
         Button bStart = new Button("Start Simulation");
-        bStart.setStyle("-fx-text-fill: #fff; -fx-font-size: 3.9em; -fx-font-weight: bold; -fx-background-color: #354654; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 50, 0.5, 0.0, 0.0); -fx-cursor: hand");
+        bStart.setStyle("-fx-text-fill: #fff; -fx-font-size: 3.9em; -fx-font-weight: bold; -fx-background-color: #354654; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0); -fx-cursor: hand");
         bStart.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -288,13 +305,26 @@ public class Fenetre_principale {
         g.clearRect(0, 0, 700, 200);
         g.setStroke(Color.BLACK);
 
-        g.strokeLine(10, 10, 10, 190);
-        g.strokeLine(11, 10, 11, 190);
-        g.strokeLine(12, 10, 12, 190);
+        g.strokeLine(14, 10, 14, 188);
+        g.strokeLine(13, 10, 13, 188);
+        g.strokeLine(12, 10, 12, 188);
 
-        g.strokeLine(10, 190, 690, 190);
-        g.strokeLine(10, 189, 690, 189);
-        g.strokeLine(10, 188, 690, 188);
+        g.strokeLine(12, 186, 690, 186);
+        g.strokeLine(12, 187, 690, 187);
+        g.strokeLine(12, 188, 690, 188);
+
+        g.setFill(Color.RED);
+        g.setFont(new Font("Arial Black", 15));
+        g.fillText("100 000", 15,15);
+
+        g.setFill(Color.BLUE);
+        g.setFont(new Font("Arial Black", 15));
+        g.fillText("1", 0,15);
+
+        g.setFill(Color.BLACK);
+        g.setFont(new Font("Arial Black", 15));
+        g.fillText("0", 0,200);
+        g.fillText("t", 685,200);
     }
 
 }
