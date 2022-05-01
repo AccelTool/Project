@@ -29,6 +29,7 @@ import main.Application;
 
 import java.awt.*;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.Array;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -113,7 +114,11 @@ public class Fenetre_principale {
         bInitialise.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                application.initializeDB(db);
+                try {
+                    application.initializeDB(db);
+                } catch (URISyntaxException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -170,6 +175,8 @@ public class Fenetre_principale {
                         }
 
                     } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    } catch (URISyntaxException e) {
                         throw new RuntimeException(e);
                     }
                     t = 0.0;

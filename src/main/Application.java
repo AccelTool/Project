@@ -6,6 +6,7 @@ import gui.Fenetre_principale;
 
 import java.io.*;
 import java.lang.reflect.Array;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class Application {
@@ -17,14 +18,23 @@ public class Application {
     }
 
 
-    private String getRessource(String fileName) {
+    private String getRessource(String fileName) throws URISyntaxException {
         //adapted from https://mkyong.com/java/java-read-a-file-from-resources-folder/
-        ClassLoader classLoader = getClass().getClassLoader();
-        return classLoader.getResource(fileName).getPath();
+
+        String jarPath = Application.class
+                .getProtectionDomain()
+                .getCodeSource()
+                .getLocation()
+                .toURI()
+                .getPath();
+
+        File file = new File(jarPath);
+
+        return file.getParent() + "/" + fileName;
 
     }
 
-    private void launchOrowan(String path_inv, String path_out, String path) throws IOException {
+    private void launchOrowan(String inv_file, String out_file, String path) throws IOException {
 
         Process process = null;
         try {
@@ -41,8 +51,8 @@ public class Application {
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(stdin));
 
         writer.write("i\nc\n");
-        writer.write( path_inv.substring(1, path_inv.length())+"\n");
-        writer.write(path_out.substring(1, path_out.length())+"\n");
+        writer.write( inv_file + "\n");
+        writer.write(out_file +"\n");
         writer.flush();
         writer.close();
 
@@ -53,7 +63,7 @@ public class Application {
         }
     }
 
-    public boolean startSimulation(Database db, String inv_file,String out_file, ArrayList<CanvasLineChart> charts, int id) throws IOException {
+    public boolean startSimulation(Database db, String inv_file,String out_file, ArrayList<CanvasLineChart> charts, int id) throws IOException, URISyntaxException {
 
         Application app = new Application(db);
 
@@ -64,7 +74,7 @@ public class Application {
         System.out.println("path : " + path);
         System.out.println(id);
 
-        String path_folder = path.substring(1, path.length()-fileOrowan.length());
+        //String path_folder = path.substring(1, path.length()-fileOrowan.length());
 
         //Lis les lignes de SQL une par une, pour chaque ligne on update inv_file avec le contenu de la ligne et on lance Orowan
         ArrayList<Object> entree = new ArrayList<>();
@@ -81,13 +91,17 @@ public class Application {
             //we want to write into inv_file the header "Cas	He	Hs	Te	Ts	Diam_WR	WRyoung	offset ini	mu_ini	Force	G"
             //then the content of entree
             //System.out.println("-----"+path_folder);
-            path_folder = path_folder;//+"resources/";
+            //path_folder = path_folder;//+"resources/";
             //System.out.println("-----"+path_folder);
             //delete the file if it exists
             File file = new File(path_inv);
             if (file.exists()) {
                 file.delete();
             }
+
+            //System.out.println("\n\n----------------\n" + path_inv + "\n----------------\n\n");
+
+
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
                     new FileOutputStream(path_inv, true), "utf-8"));
             writer.write("Cas	He	Hs	Te	Ts	Diam_WR	WRyoung	offset ini	mu_ini	Force	G\n");
@@ -97,14 +111,14 @@ public class Application {
 
 
             //launch Orowan
-            launchOrowan(path_inv,path_out,path);
+            launchOrowan(inv_file,out_file,path);
 
 
             //get the output data from out_file
             // the output file has a header "case	Errors		OffsetYield	Friction	Rolling_Torque	Sigma_Moy	Sigma_Ini	Sigma_Out	Sigma_Max	Force_Error(%)	Slip_Error(%)	Has_Converged"
             //we want to read the data of the second line from the file out_file and put it into an arraylist
             ArrayList<Object> sortie = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader(path_folder+out_file));
+            BufferedReader reader = new BufferedReader(new FileReader(path_out));
             String line = ((BufferedReader) reader).readLine();
             //get only the second line
             line = ((BufferedReader) reader).readLine();
@@ -140,7 +154,7 @@ public class Application {
     }
 
 
-    public void initializeDB(Database db){
+    public void initializeDB(Database db) throws URISyntaxException {
         Application app = new Application(db);
         String path_inv = app.getRessource("inv_cst.txt");
 
